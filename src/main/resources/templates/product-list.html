@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Product Manager</title>
+</head>
+<body>
+<div align="center">
+    <div>
+        <h1>Product List</h1>
+        <a href="/new">Create New Product</a>
+    </div>
+    <div>&nbsp;</div>
+    <div>
+        <form th:action="@{/page/1}">
+            Filter:
+            <input type="text" name="keyword" required/>
+            &nbsp;
+            <input type="submit" value="Search"/>
+            &nbsp;
+            <input type="button" value="Clear" onclick="clearFilter()"/>
+        </form>
+    </div>
+    <div>&nbsp;
+
+    <table border="1" cellpadding="10">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Discount</th>
+            <th>Actual price</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${listProducts}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.category}"></td>
+            <td th:text="${product.description}"></td>
+            <td th:text="${product.discount}"></td>
+            <td th:text="${product.actualPrice}"></td>
+            <td>
+                <a th:href="@{'/edit/' + ${product.id}}">Edit</a>
+                &nbsp;&nbsp;&nbsp;
+                <a th:href="@{'/delete/' + ${product.id}}">Delete</a>
+                &nbsp &nbsp
+                <a th:href="@{'/add/' + ${product}}">Add to bucket</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+    <div>&nbsp; </div>
+<div>
+    Total Items:[[${totalItems}]] - Page [[${pageNumber}]] of [[${totalPages}]]
+    &nbsp; - &nbsp;
+    <a th:if="${pageNumber>1}" th:href="@{/page/1}">First</a>
+    <span th:unless="${pageNumber>1}">First</span>
+    &nbsp;&nbsp;
+    <a th:if="${pageNumber>1}" th:href="@{'/page/'+ ${pageNumber-1}}">Previous</a>
+    <span th:unless="${pageNumber>1}">Previous</span>
+    &nbsp;&nbsp;
+    <span th:each="i:${#numbers.sequence(1,totalPages)}">
+            <a th:if="${i != pageNumber}" th:href="@{'/page/'+${i}}">[[${i}]]</a>
+            <span th:unless="${i != pageNumber}">[[${i}]]</span>
+        &nbsp;&nbsp;
+    </span>
+
+    <a th:if="${pageNumber<totalPages}" th:href="@{'/page/'+ ${pageNumber+1}}">Next</a>
+    <span th:unless="${pageNumber<totalPages}">Next</span>
+    &nbsp;&nbsp;
+    <a th:if="${pageNumber<totalPages}" th:href="@{'/page/'+ ${totalPages}}">Last</a>
+    <span th:unless="${pageNumber<totalPages}">Last</span>
+</div>
+</div>
+<script type="text/javascript">
+    function clearFilter() {
+        window.location = '/page/1'
+    }
+</script>
+</body>
+</html>
