@@ -1,6 +1,7 @@
 package com.evgkor.finalProject.bean;
 
 import lombok.Data;
+import org.hibernate.annotations.Formula;
 
 import java.math.BigDecimal;
 import javax.persistence.*;
@@ -23,5 +24,6 @@ public class Product {
     @Column(name = "discount")
     private BigDecimal discount;
     @Column(name = "actual_price")
+    @Formula(value =  "round(price-(price*discount)/100,2)")
     private BigDecimal actualPrice;
 }

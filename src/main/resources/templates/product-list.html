@@ -3,6 +3,17 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Product Manager</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <div align="center">
@@ -22,20 +33,19 @@
         </form>
     </div>
     <div>&nbsp;
-
-    <table border="1" cellpadding="10">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Price</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Discount</th>
-            <th>Actual price</th>
-            <th>Actions</th>
-        </tr>
-        </thead>
+        <table class="table">
+            <thead class="thead-inverse">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Discount</th>
+                <th>Actual Price</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
         <tbody>
         <tr th:each="product : ${listProducts}">
             <td th:text="${product.id}"></td>
@@ -50,7 +60,7 @@
                 &nbsp;&nbsp;&nbsp;
                 <a th:href="@{'/delete/' + ${product.id}}">Delete</a>
                 &nbsp &nbsp
-                <a th:href="@{'/add/' + ${product}}">Add to bucket</a>
+                <a th:href="@{'/add/' + ${product}}">Buy</a>
             </td>
         </tr>
         </tbody>
