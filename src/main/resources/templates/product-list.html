@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
     <title>Product Manager</title>
@@ -19,7 +19,9 @@
 <div align="center">
     <div>
         <h1>Product List</h1>
+        <div sec:authorize="hasAnyAuthority('ADMIN')">
         <a href="/new">Create New Product</a>
+        </div>
     </div>
     <div>&nbsp;</div>
     <div>
@@ -56,10 +58,14 @@
             <td th:text="${product.discount}"></td>
             <td th:text="${product.actualPrice}"></td>
             <td>
+                <div sec:authorize="hasAnyAuthority('ADMIN')">
                 <a th:href="@{'/edit/' + ${product.id}}">Edit</a>
                 &nbsp;&nbsp;&nbsp;
+                </div>
+                <div sec:authorize="hasAnyAuthority('ADMIN')">
                 <a th:href="@{'/delete/' + ${product.id}}">Delete</a>
                 &nbsp &nbsp
+                </div>
                 <a th:href="@{'/add/' + ${product}}">Buy</a>
             </td>
         </tr>

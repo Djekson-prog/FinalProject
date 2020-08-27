@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/index").permitAll()
+                .antMatchers("/index","/register").permitAll()
                 .antMatchers("/new").hasAnyAuthority("ADMIN")
                 .antMatchers("/edit/**").hasAnyAuthority("ADMIN")
                 .antMatchers("/delete/**").hasAuthority("ADMIN")
@@ -53,7 +53,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .defaultSuccessUrl("/index")
                 .permitAll()
                 .and()
-                .logout().permitAll()
+                .logout()
+                .logoutSuccessUrl("/login")
+                .permitAll()
                 .and()
                 .exceptionHandling().accessDeniedPage("/403")
         ;
